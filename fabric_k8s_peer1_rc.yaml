@@ -3,24 +3,25 @@ kind: ReplicationController
 metadata:
   creationTimestamp: null
   labels:
-    service: peer0.org1.example.com
-  name: peer0.org1.example.com
+    service: peer0-org1-example-com
+  name: peer0-org1-example-com
   namespace: fabric
 spec:
   replicas: 1
   selector:
-    service: peer0.org1.example.com
+    service: peer0-org1-example-com
   template:
     metadata:
       creationTimestamp: null
       labels:
-        service: peer0.org1.example.com
+        service: peer0-org1-example-com
     spec:
       containers:
       - command:
         - sh
         - -c
-        - peer node start
+        - sleep 100000
+#        - peer node start
         env:
         - name: CORE_PEER_ID
           value: peer0.org1.example.com
@@ -50,9 +51,9 @@ spec:
           value: /etc/hyperledger/fabric/tls/server.key
         - name: CORE_PEER_TLS_ROOTCERT_FILE
           value: /etc/hyperledger/fabric/tls/ca.crt          
-        image: hyperledger/fabric-peer
+        image: hyperledger/fabric-peer:x86_64-1.0.1
         imagePullPolicy: ""
-        name: peer0.org1.example.com
+        name: peer0-org1-example-com
         volumeMounts:
         - mountPath: /etc/hosts
           name: hosts
@@ -62,7 +63,8 @@ spec:
           name: msp
         - mountPath: /etc/hyperledger/fabric/tls
           name: tls
-              
+        - mountPath: /volumemount
+          name: myvol                      
 #        - mountPath: /usr/bin/telnet     TODO: mount file telnet
 #          name: telnet
         ports:
@@ -80,10 +82,15 @@ spec:
           path: /var/run/
       - name: msp
         hostPath: 
-          path: ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp
+          path: /home/oleks/bluemix/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp
       - name: tls
         hostPath: 
-          path: ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls
+          path: /home/oleks/bluemix/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls
+
+      - name: myvol
+        persistentVolume:
+          claimName: mypvc
+
 #      - name: telnet
 #        hostPath: 
 #          path: /usr/bin/telnet
