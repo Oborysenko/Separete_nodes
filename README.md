@@ -18,3 +18,7 @@ docker pull hyperledger/fabric-tools:x86_64-1.0.0 &&
 docker tag hyperledger/fabric-orderer:x86_64-1.0.0-rc1 hyperledger/fabric-orderer:latest &&
 docker tag hyperledger/fabric-peer:x86_64-1.0.0 hyperledger/fabric-peer:latest &&
 docker tag hyperledger/fabric-tools:x86_64-1.0.0 hyperledger/fabric-tools:latest
+
+
+
+https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
