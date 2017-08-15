@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: crypto-config-pvc
+  name: crypto-config-peer0-org1-pvc
   namespace: fabric
 spec:
 #  storageClassName: manual
