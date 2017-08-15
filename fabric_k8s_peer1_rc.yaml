@@ -88,7 +88,7 @@ spec:
           path: /home/oleks/bluemix/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls
 
       - name: myvol
-        persistentVolume:
+        persistentVolumeClaim:
           claimName: mypvc
 
 #      - name: telnet
