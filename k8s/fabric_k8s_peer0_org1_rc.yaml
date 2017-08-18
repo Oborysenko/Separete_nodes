@@ -17,14 +17,7 @@ spec:
         service: peer0-org1-example-com
     spec:
       containers:
-#      - command:
-#        - sh
-#        - -c
       - command: ["/bin/sh", "-c", "chmod +x /root/start_peer.sh && /root/start_peer.sh"]
-#        - tar -xvf /etc/hyperledger/fabric/peer0.org1.tar -C /etc/hyperledger/fabric/;
-#      - command: ["/bin/sh", "-c", "tar -xvf /etc/fabric_crypto/peer0.org1.tar -C /etc/hyperledger/fabric/ && chown -R root.root /etc/hyperledger/fabric/ && rm -f /etc/hyperledger/fabric/msp/config.yaml && peer node start && sleep 100000"] 
-#        - sleep 100000
-#        - peer node start
         env:
         - name: CORE_PEER_ID
           value: peer0.org1.example.com
@@ -62,18 +55,6 @@ spec:
           mountPath: /etc/fabric_crypto
         - name: start-peer
           mountPath: /root
-##        - mountPath: /etc/hosts
-##          name: hosts
-###        - mountPath: /host/var/run/
-###          name: varrun
-###        - mountPath: /etc/hyperledger/fabric
-###          name: msptls 
-#        - mountPath: /etc/hyperledger/fabric/msp
-#          name: msp
-#        - mountPath: /etc/hyperledger/fabric/tls
-#          name: tls
-        - mountPath: /volumemount
-          name: myvol                      
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -87,24 +68,8 @@ spec:
       - name: start-peer
         configMap:
           name: start-peer
-##      - name: hosts
-##        hostPath: 
-##          path: /etc/hosts
       - name: varrun
         hostPath: 
           path: /var/run/
-###      - name: msptls
-###        persistentVolumeClaim:
-###          claimName: crypto-config-peer0-org1-pvc
-#      - name: msp
-#        hostPath: 
-#          path: /home/oleks/bx_fabric/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp
-#      - name: tls
-#        hostPath: 
-#          path: /home/oleks/bx_fabric/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls
-
-      - name: myvol
-        persistentVolumeClaim:
-          claimName: mypvc
 status:
   replicas: 0
