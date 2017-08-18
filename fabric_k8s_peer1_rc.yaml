@@ -20,9 +20,9 @@ spec:
 #      - command:
 #        - sh
 #        - -c
-#      - command: ["/bin/sh", "-c", "chmod +x /root/start_peer.sh && /root/start_peer.sh"]
+      - command: ["/bin/sh", "-c", "chmod +x /root/start_peer.sh && /root/start_peer.sh"]
 #        - tar -xvf /etc/hyperledger/fabric/peer0.org1.tar -C /etc/hyperledger/fabric/;
-      - command: ["/bin/sh", "-c", "tar -xvf /etc/fabric_crypto/peer0.org1.tar -C /etc/hyperledger/fabric/ && chown -R root.root /etc/hyperledger/fabric/ && rm -f /etc/hyperledger/fabric/msp/config.yaml && peer node start && sleep 100000"] 
+#      - command: ["/bin/sh", "-c", "tar -xvf /etc/fabric_crypto/peer0.org1.tar -C /etc/hyperledger/fabric/ && chown -R root.root /etc/hyperledger/fabric/ && rm -f /etc/hyperledger/fabric/msp/config.yaml && peer node start && sleep 100000"] 
 #        - sleep 100000
 #        - peer node start
         env:
