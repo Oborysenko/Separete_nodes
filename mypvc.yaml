@@ -2,11 +2,13 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: mypvc
+  labels:
+    type: local
   namespace: fabric
 spec:
 #  storageClassName: manual
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
