@@ -47,8 +47,6 @@ spec:
         volumeMounts:
         - name: peer-cli-cm
           mountPath: /opt/gopath/src/github.com/hyperledger/fabric/peer
-        ports:
-        - containerPort: 7050
         resources: {}
       restartPolicy: Always
       serviceAccountName: ""
