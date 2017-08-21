@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: cli
+  namespace: fabric
+spec:
+  type: NodePort
+  selector:
+    service: cli
+status:
+  loadBalancer: {}
