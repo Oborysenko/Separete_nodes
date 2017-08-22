@@ -17,12 +17,15 @@ spec:
         service: orderer-example-com
     spec:
       containers:
-      - command: ["/bin/sh", "-c", "orderer"]
+      - command: ["/bin/sh", "-c", "mkdir -p /var/hyperledger/orderer && chmod +x /root/start_orderer.sh && /root/start_orderer.sh"]
+#      - command: ["/bin/sh", "-c", "mkdir -p /var/hyperledger/orderer && echo tttt && chmod +x /root/start_orderer.sh && sleep 50000"]
+#      - command: ["/bin/sh", "-c", "orderer"]
+#      - command: ["/bin/sh", "-c", "sleep 50000"]
         env:
         - name: ORDERER_GENERAL_GENESISMETHOD
           value: file
         - name: ORDERER_GENERAL_GENESISFILE
-          value: /var/hyperledger/orderer/orderer.genesis.block
+          value: /var/genesis_block/genesis.block
         - name: ORDERER_GENERAL_LOCALMSPID
           value: OrdererMSP
         - name: ORDERER_GENERAL_LOCALMSPDIR
@@ -36,38 +39,50 @@ spec:
           value: "true"
 
         - name: ORDERER_GENERAL_TLS_PRIVATEKEY
-          value: /var/hyperledger/orderer/tls/server.key
+          value: "/var/hyperledger/orderer/tls/server.key"
         - name: ORDERER_GENERAL_TLS_CERTIFICATE
-          value: /var/hyperledger/orderer/tls/server.crt
+          value: "/var/hyperledger/orderer/tls/server.crt"
+
         - name: ORDERER_GENERAL_TLS_ROOTCAS
-          value: /var/hyperledger/orderer/tls/ca.crt
-        image: hyperledger/fabric-orderer
-        imagePullPolicy: ""
+          value: "[/var/hyperledger/orderer/tls/ca.crt]"
+        image: hyperledger/fabric-orderer:x86_64-1.0.1
+#        imagePullPolicy: ""
         name: orderer-example-com
         volumeMounts:
-        - name: msptls
-          mountPath: /etc/fabric_crypto
-        - name: channel-artifacts-cm
-          mountPath: /var/hyperledger/orderer
-        - name: start-orderer
+        - name: orderer-stuff-vol
+          mountPath: /var/hyperledger/
+        - name: start-orderer-vol
           mountPath: /root
+#        - name: genesis-block-vol
+#          mountPath: /var/genesis_block
+
+#        - mountPath: /varaaa/hyperledger/ordereraaaa
+#          name: orderer-vol
+        - name: orderer-vol
+          mountPath: /var/genesis_block
         ports:
         - containerPort: 7050
         resources: {}
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-      - name: msptls
+##      - name: msptls
+##        configMap:
+##          name: cc-orderer
+      - name: start-orderer-vol
         configMap:
-          name: cc-orderer
-      - name: start-orderer
+          name: start-orderer-cm
+      - name: orderer-stuff-vol
         configMap:
-          name: start-orderer
-      - name: channel-artifacts-vol
-        configMap:
-          name: channel-artifacts-cm
-      - name: varrun
-        hostPath: 
-          path: /var/run/
+          name: orderer-stuff-cm 
+#      - name: genesis-block-vol
+#        configMap:
+#          name: orderer-genesis-block-cm
+#      - name: orderer-vol
+#        hostPath:
+#          path: /home/oleks/aaa
+      - name: orderer-vol
+        secret:
+          secretName: orderer-sec 
 status:
   replicas: 0

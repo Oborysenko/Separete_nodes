@@ -7,11 +7,10 @@ metadata:
 spec:
   type: NodePort
   ports:
-   - name: "port1"
-     nodePort: 0
+   - name: "7050"
+     nodePort: 30001
      port: 7050
-     protocol: ""
-     targetPort: 0
+     targetPort: 7050
   selector:
     service: orderer-example-com
 status:
