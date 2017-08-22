@@ -6,6 +6,11 @@ metadata:
   namespace: fabric
 spec:
   type: NodePort
+  ports:
+   - name: "80"
+     nodePort: 30080
+     port: 30080
+     targetPort: 30080
   selector:
     service: cli
 status:
