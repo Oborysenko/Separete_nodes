@@ -9,12 +9,12 @@ spec:
   ports:
    - name: "port1"
      nodePort: 0
-     port: 7051
+     port: 17051
      protocol: ""
      targetPort: 0
    - name: "port2"
      nodePort: 0
-     port: 7053
+     port: 17053
      protocol: ""
      targetPort: 0
   selector:
