@@ -5,18 +5,14 @@ metadata:
   name: peer0-org1-example-com
   namespace: fabric
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-   - name: "port1"
-     nodePort: 0
+   - name: "7051"
      port: 7051
-     protocol: ""
-     targetPort: 0
-   - name: "port2"
-     nodePort: 0
+     targetPort: 7051
+   - name: "7053"
      port: 7053
-     protocol: ""
-     targetPort: 0
+     targetPort: 7053
   selector:
     service: peer0-org1-example-com
 status:
