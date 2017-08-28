@@ -17,19 +17,19 @@ spec:
         service: orderer-example-com
     spec:
       containers:
-      - command: ["/bin/sh", "-c", "mkdir -p /var/hyperledger/orderer && chmod +x /root/start_orderer.sh && /root/start_orderer.sh"]
+#      - command: ["/bin/sh", "-c", "mkdir -p /var/hyperledger/orderer && chmod +x /root/start_orderer.sh && /root/start_orderer.sh"]
 #      - command: ["/bin/sh", "-c", "mkdir -p /var/hyperledger/orderer && echo tttt && chmod +x /root/start_orderer.sh && sleep 50000"]
-#      - command: ["/bin/sh", "-c", "orderer"]
+      - command: ["/bin/sh", "-c", "orderer"]
 #      - command: ["/bin/sh", "-c", "sleep 50000"]
         env:
         - name: ORDERER_GENERAL_GENESISMETHOD
           value: file
         - name: ORDERER_GENERAL_GENESISFILE
-          value: /var/genesis_block/genesis.block
+          value: /var/hyperledger/Separete_nodes/k8s/orderer.genesis.block
         - name: ORDERER_GENERAL_LOCALMSPID
           value: OrdererMSP
         - name: ORDERER_GENERAL_LOCALMSPDIR
-          value: /var/hyperledger/orderer/msp
+          value: /var/hyperledger/Separete_nodes/k8s/orderer_stuff/msp
 
         - name: ORDERER_GENERAL_LISTENADDRESS
           value: 0.0.0.0
@@ -39,50 +39,55 @@ spec:
           value: "false"
 
         - name: ORDERER_GENERAL_TLS_PRIVATEKEY
-          value: "/var/hyperledger/orderer/tls/server.key"
+          value: "/var/hyperledger/Separete_nodes/k8s/orderer_stuff/tls/server.key"
         - name: ORDERER_GENERAL_TLS_CERTIFICATE
-          value: "/var/hyperledger/orderer/tls/server.crt"
+          value: "/var/hyperledger/orderer/Separete_nodes/k8s/orderer_stuff/tls/server.crt"
 
         - name: ORDERER_GENERAL_TLS_ROOTCAS
-          value: "[/var/hyperledger/orderer/tls/ca.crt]"
+          value: "[/var/hyperledger/orderer/Separete_nodes/k8s/orderer_stuff/tls/ca.crt]"
         image: hyperledger/fabric-orderer:x86_64-1.0.1
 #        imagePullPolicy: ""
         name: orderer-example-com
         volumeMounts:
-        - name: orderer-stuff-vol
+        - name: git-volume
           mountPath: /var/hyperledger/
-        - name: start-orderer-vol
-          mountPath: /root
-#        - name: genesis-block-vol
-#          mountPath: /var/genesis_block
+#        - name: orderer-stuff-vol
+#          mountPath: /var/hyperledger/
+#        - name: start-orderer-vol
+#          mountPath: /root
+##        - name: genesis-block-vol
+##          mountPath: /var/genesis_block
 
-#        - mountPath: /varaaa/hyperledger/ordereraaaa
-#          name: orderer-vol
-        - name: orderer-vol
-          mountPath: /var/genesis_block
+##        - mountPath: /varaaa/hyperledger/ordereraaaa
+##          name: orderer-vol
+#        - name: orderer-vol
+#          mountPath: /var/genesis_block
         ports:
         - containerPort: 7050
         resources: {}
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
+      - name: git-volume
+        gitRepo:
+          repository: "https://github.com/Oborysenko/Separete_nodes.git"
 ##      - name: msptls
 ##        configMap:
 ##          name: cc-orderer
-      - name: start-orderer-vol
-        configMap:
-          name: start-orderer-cm
-      - name: orderer-stuff-vol
-        configMap:
-          name: orderer-stuff-cm 
-#      - name: genesis-block-vol
+#      - name: start-orderer-vol
 #        configMap:
-#          name: orderer-genesis-block-cm
+#          name: start-orderer-cm
+#      - name: orderer-stuff-vol
+#        configMap:
+#          name: orderer-stuff-cm 
+##      - name: genesis-block-vol
+##        configMap:
+##          name: orderer-genesis-block-cm
+##      - name: orderer-vol
+##        hostPath:
+##          path: /home/oleks/aaa
 #      - name: orderer-vol
-#        hostPath:
-#          path: /home/oleks/aaa
-      - name: orderer-vol
-        secret:
-          secretName: orderer-sec 
+#        secret:
+#          secretName: orderer-sec 
 status:
   replicas: 0

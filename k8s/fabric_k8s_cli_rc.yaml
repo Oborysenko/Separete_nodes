@@ -33,32 +33,37 @@ spec:
         - name: CORE_PEER_LOCALMSPID
           value: Org1MSP
         - name: CORE_PEER_TLS_ENABLED
-          value: "true"
+          value: "false"
         - name: CORE_PEER_TLS_CERT_FILE
-          value: /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt
+          value: /var/hyperledger/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt
         - name: CORE_PEER_TLS_KEY_FILE
-          value: /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key
+          value: /var/hyperledger/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key
         - name: CORE_PEER_TLS_ROOTCERT_FILE
-          value: /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+          value: /var/hyperledger/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
         - name: CORE_PEER_MSPCONFIGPATH
-          value: /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+          value: /var/hyperledger/Separete_nodes/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
         image: hyperledger/fabric-tools:x86_64-1.0.1
         imagePullPolicy: ""
         name: cli
         volumeMounts:
-        - name: cli-stuff-vol
-          mountPath: /opt/gopath/src/github.com/hyperledger/fabric
-        - name: cli-channel-artifacts-vol
-          mountPath: /var/channel-artifacts
+        - name: git-volume
+          mountPath: /var/hyperledger/
+#        - name: cli-stuff-vol
+#          mountPath: /opt/gopath/src/github.com/hyperledger/fabric
+#        - name: cli-channel-artifacts-vol
+#          mountPath: /var/channel-artifacts
         resources: {}
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-      - name: cli-stuff-vol
-        configMap:
-          name: cli-stuff-cm
-      - name: cli-channel-artifacts-vol
-        secret:
-          secretName: cli-channel-artifacts-sec
+      - name: git-volume
+        gitRepo:
+          repository: "https://github.com/Oborysenko/Separete_nodes.git"
+#      - name: cli-stuff-vol
+#        configMap:
+#          name: cli-stuff-cm
+#      - name: cli-channel-artifacts-vol
+#        secret:
+#          secretName: cli-channel-artifacts-sec
 status:
   replicas: 0
