@@ -14,7 +14,7 @@ CHANNEL_NAME="$1"
 : ${TIMEOUT:="60"}
 COUNTER=1
 MAX_RETRY=5
-ORDERER_CA=/var/hyperledger/Separete_nodes/k8s/crypto-config/ordererOrganizations/example-com/orderers/orderer-example-com/msp/tlscacerts/tlsca.example-com-cert.pem
+ORDERER_CA=/var/hyperledger/Separete_nodes/k8s/crypto-config/ordererOrganizations/example-com/orderers/orderer.example-com/msp/tlscacerts/tlsca.example-com-cert.pem
 
 echo "Channel name : "$CHANNEL_NAME
 
