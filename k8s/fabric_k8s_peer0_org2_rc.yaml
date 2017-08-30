@@ -47,6 +47,9 @@ spec:
           value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org2-example-com/peers/peer0.org2-example-com/tls/server.key
         - name: CORE_PEER_TLS_ROOTCERT_FILE
           value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org2-example-com/peers/peer0.org2-example-com/tls/ca.crt                  
+          
+        - name: FABRIC_CFG_PATH
+          value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org2-example-com/peers/peer0.org2-example-com 
         image: hyperledger/fabric-peer:x86_64-1.0.1
         imagePullPolicy: ""
         name: peer0-org2-example-com
