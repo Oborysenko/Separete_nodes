@@ -17,7 +17,7 @@ spec:
         service: peer1-org2-example-com
     spec:
       containers:
-      - command: ["/bin/sh", "-c", "chmod +x /root/start_peer.sh && /root/start_peer.sh"]
+      - command: ["/bin/sh", "-c", "peer node start"] 
         env:
         - name: CORE_PEER_ID
           value: peer1-org2-example-com
@@ -42,19 +42,17 @@ spec:
           value: "true"
 
         - name: CORE_PEER_TLS_CERT_FILE
-          value: /etc/hyperledger/fabric/tls/server.crt
+          value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com/tls/server.crt
         - name: CORE_PEER_TLS_KEY_FILE
-          value: /etc/hyperledger/fabric/tls/server.key
+          value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com/tls/server.key
         - name: CORE_PEER_TLS_ROOTCERT_FILE
-          value: /etc/hyperledger/fabric/tls/ca.crt          
+          value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com/tls/ca.crt                   
         image: hyperledger/fabric-peer:x86_64-1.0.1
         imagePullPolicy: ""
         name: peer1-org2-example-com
         volumeMounts:
-        - name: msptls
-          mountPath: /etc/fabric_crypto
-        - name: start-peer
-          mountPath: /root
+        - name: git-volume
+          mountPath: /var/hyperledger/
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -62,14 +60,8 @@ spec:
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-      - name: msptls
-        configMap:
-          name: cc-peer1-org2
-      - name: start-peer
-        configMap:
-          name: start-peer
-      - name: varrun
-        hostPath: 
-          path: /var/run/
+      - name: git-volume
+        gitRepo:
+          repository: "https://github.com/Oborysenko/Separete_nodes.git"
 status:
   replicas: 0
