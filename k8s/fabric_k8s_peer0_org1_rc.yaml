@@ -17,7 +17,7 @@ spec:
         service: peer0-org1-example-com
     spec:
       containers:
-      - command: ["/bin/sh", "-c", "peer node start"] 
+      - command: ["/bin/sh", "-c", "cp -r /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com/* /etc/hyperledger/fabric/ && peer node start"] 
         env:
         - name: CORE_PEER_ID
           value: peer0-org1-example-com
@@ -48,8 +48,8 @@ spec:
         - name: CORE_PEER_TLS_ROOTCERT_FILE
           value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com/tls/ca.crt          
           
-        - name: FABRIC_CFG_PATH
-          value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com 
+#        - name: FABRIC_CFG_PATH
+#          value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com 
         image: hyperledger/fabric-peer:x86_64-1.0.1
         imagePullPolicy: ""
         name: peer0-org1-example-com
