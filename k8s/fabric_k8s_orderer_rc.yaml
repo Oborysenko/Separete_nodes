@@ -41,10 +41,10 @@ spec:
         - name: ORDERER_GENERAL_TLS_PRIVATEKEY
           value: "/var/hyperledger/Separete_nodes/k8s/crypto-config/ordererOrganizations/example-com/orderers/orderer.example-com/tls/server.key"
         - name: ORDERER_GENERAL_TLS_CERTIFICATE
-          value: "/var/hyperledger/orderer/Separete_nodes/k8s/crypto-config/ordererOrganizations/example-com/orderers/orderer.example-com/tls/server.crt"
+          value: "/var/hyperledger/Separete_nodes/k8s/crypto-config/ordererOrganizations/example-com/orderers/orderer.example-com/tls/server.crt"
 
         - name: ORDERER_GENERAL_TLS_ROOTCAS
-          value: "[/var/hyperledger/orderer/Separete_nodes/k8s/crypto-config/ordererOrganizations/example-com/orderers/orderer.example-com/tls/ca.crt]"
+          value: "[/var/hyperledger/Separete_nodes/k8s/crypto-config/ordererOrganizations/example-com/orderers/orderer.example-com/tls/ca.crt]"
         image: hyperledger/fabric-orderer:x86_64-1.0.1
 #        imagePullPolicy: ""
         name: orderer-example-com
