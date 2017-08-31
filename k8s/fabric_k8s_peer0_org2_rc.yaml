@@ -66,5 +66,8 @@ spec:
       - name: git-volume
         gitRepo:
           repository: "https://github.com/Oborysenko/Separete_nodes.git"
+      - hostPath:
+          path: /var/run/docker.sock
+        name: dockersocket
 status:
   replicas: 0
