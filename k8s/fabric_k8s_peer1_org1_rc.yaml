@@ -60,6 +60,8 @@ spec:
           mountPath: /host/var/run/docker.sock
         - name: docker-graph-storage 
           mountPath: /var/lib/docker 
+        - name: dockerbin 
+          mountPath: /usr/bin/docker
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -75,5 +77,8 @@ spec:
         name: dockersocket
       - name: docker-graph-storage 
         emptyDir: {}
+      - name: dockerbin
+        hostPath:
+          path: /usr/bin/docker
 status:
   replicas: 0
