@@ -68,7 +68,7 @@ spec:
 #        - name: dockerd 
 #          mountPath: /usr/bin/dockerd
         - name: usrbin
-          mountPath: /usr/bin/dockerd
+          mountPath: /usr/bin
         ports:
         - containerPort: 7051
         - containerPort: 7053
