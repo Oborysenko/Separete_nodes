@@ -51,6 +51,8 @@ spec:
           
         - name: FABRIC_CFG_PATH
           value: /var/hyperledger/Separete_nodes/k8s/crypto-config/peerOrganizations/org1-example-com/peers/peer0.org1-example-com 
+        securityContext:
+          privileged: true
         image: hyperledger/fabric-peer:x86_64-1.0.1
         imagePullPolicy: ""
         name: peer0-org1-example-com
