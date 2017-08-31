@@ -57,7 +57,7 @@ spec:
         - name: git-volume
           mountPath: /var/hyperledger/
         - name: dockersocket
-          mountPath: /var/run/docker.sock
+          mountPath: /host/var/run/docker.sock
         ports:
         - containerPort: 7051
         - containerPort: 7053
