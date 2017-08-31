@@ -59,6 +59,8 @@ spec:
           mountPath: /var/hyperledger/
         - name: dockersocket
           mountPath: /host/var/run/docker.sock
+        - name: docker-graph-storage 
+          mountPath: /var/lib/docker 
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -72,5 +74,7 @@ spec:
       - hostPath:
           path: /var/run/docker.sock
         name: dockersocket
+      - name: docker-graph-storage 
+        emptyDir: {}
 status:
   replicas: 0
