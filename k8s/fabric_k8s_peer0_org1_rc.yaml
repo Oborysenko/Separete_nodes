@@ -61,6 +61,8 @@ spec:
           mountPath: /host/var/run/docker.sock
         - name: docker-graph-storage 
           mountPath: /var/lib/docker 
+        - name: dockerbin 
+          mountPath: /usr/bin/docker
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -71,10 +73,13 @@ spec:
       - name: git-volume
         gitRepo:
           repository: "https://github.com/Oborysenko/Separete_nodes.git"
-      - hostPath:
+      - name: dockersocket
+        hostPath:
           path: /var/run/docker.sock
-        name: dockersocket
       - name: docker-graph-storage 
         emptyDir: {}
+      - name: dockerbin
+        hostPath:
+          path: /usr/bin/docker
 status:
   replicas: 0
