@@ -56,6 +56,8 @@ spec:
         volumeMounts:
         - name: git-volume
           mountPath: /var/hyperledger/
+        - name: dockersocket
+          mountPath: /var/run/docker.sock
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -66,5 +68,8 @@ spec:
       - name: git-volume
         gitRepo:
           repository: "https://github.com/Oborysenko/Separete_nodes.git"
+      - hostPath:
+          path: /var/run/docker.sock
+        name: dockersocket
 status:
   replicas: 0
