@@ -48,7 +48,7 @@ spec:
         - name: git-volume
           mountPath: /var/hyperledger/
         - name: dockersocket
-          mountPath: /var/run/docker.sock
+          mountPath: /host/var/run/docker.sock
         resources: {}
       restartPolicy: Always
       serviceAccountName: ""
