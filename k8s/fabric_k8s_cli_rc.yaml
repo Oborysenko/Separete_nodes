@@ -17,7 +17,6 @@ spec:
         service: cli
     spec:
       containers:
-#      - command: ["/bin/sh", "-c", "./scripts/script.sh ${CHANNEL_NAME}; sleep $TIMEOUT"]
       - command: ["/bin/sh", "-c", "sleep 40000"]
         env:
         - name: GOPATH
@@ -48,10 +47,6 @@ spec:
         volumeMounts:
         - name: git-volume
           mountPath: /var/hyperledger/
-#        - name: cli-stuff-vol
-#          mountPath: /opt/gopath/src/github.com/hyperledger/fabric
-#        - name: cli-channel-artifacts-vol
-#          mountPath: /var/channel-artifacts
         resources: {}
       restartPolicy: Always
       serviceAccountName: ""
@@ -59,11 +54,5 @@ spec:
       - name: git-volume
         gitRepo:
           repository: "https://github.com/Oborysenko/Separete_nodes.git"
-#      - name: cli-stuff-vol
-#        configMap:
-#          name: cli-stuff-cm
-#      - name: cli-channel-artifacts-vol
-#        secret:
-#          secretName: cli-channel-artifacts-sec
 status:
   replicas: 0
