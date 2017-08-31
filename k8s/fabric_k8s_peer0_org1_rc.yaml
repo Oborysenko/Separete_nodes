@@ -59,16 +59,10 @@ spec:
           mountPath: /var/hyperledger/
         - name: dockersocket
           mountPath: /host/var/run/docker.sock
-        - name: docker-graph-storage 
-          mountPath: /var/lib/docker 
-        - name: dockerbin 
-          mountPath: /usr/bin/docker
+#        - name: docker-graph-storage 
+#          mountPath: /var/lib/docker 
         - name: libltdl 
           mountPath: /usr/lib/x86_64-linux-gnu/libltdl.so.7
-#        - name: dockerd 
-#          mountPath: /usr/bin/dockerd
-        - name: usrbin
-          mountPath: /usr/bin
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -82,19 +76,10 @@ spec:
       - name: dockersocket
         hostPath:
           path: /var/run/docker.sock
-      - name: docker-graph-storage 
-        emptyDir: {}
-      - name: dockerbin
-        hostPath:
-          path: /usr/bin/docker
+#      - name: docker-graph-storage 
+#        emptyDir: {}
       - name: libltdl
         hostPath:
           path: /usr/lib/x86_64-linux-gnu/libltdl.so.7
-#      - name: dockerd
-#        hostPath:
-#          path: /usr/bin/dockerd
-      - name: usrbin
-        hostPath:
-          path: /usr/bin
 status:
   replicas: 0
