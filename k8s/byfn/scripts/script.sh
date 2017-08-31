@@ -114,7 +114,7 @@ joinChannel () {
 installChaincode () {
 	PEER=$1
 	setGlobals $PEER
-	peer chaincode install -n mycc -v 1.0 -p ../../../../../../var/hyperledger/Separete_nodes/k8s/examples/chaincode/go/chaincode_example02 >&log.txt
+	peer chaincode install -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 >&log.txt
 	res=$?
 	cat log.txt
         verifyResult $res "Chaincode installation on remote peer PEER$PEER has Failed"
@@ -184,6 +184,16 @@ chaincodeInvoke () {
 	echo "===================== Invoke transaction on PEER$PEER on channel '$CHANNEL_NAME' is successful ===================== "
 	echo
 }
+
+copySource () {
+	mkdir -p /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+	cp -r /var/hyperledger/Separete_nodes/k8s/examples/chaincode/go/chaincode_example02 /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+	echo "===================== location for chaincode prepared successful ===================== "
+}
+
+## Prepare location for source chaincode
+echo "Prepare location for source chaincode..."
+copySource
 
 ## Create channel
 echo "Creating channel..."
