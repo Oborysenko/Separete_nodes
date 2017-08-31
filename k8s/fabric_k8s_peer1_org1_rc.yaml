@@ -57,7 +57,7 @@ spec:
         - name: git-volume
           mountPath: /var/hyperledger/
         - name: dockersocket
-          mountPath: /host/var/run/docker.sock
+          mountPath: /host/var/run
         - name: docker-graph-storage 
           mountPath: /var/lib/docker 
         - name: dockerbin 
@@ -73,7 +73,7 @@ spec:
         gitRepo:
           repository: "https://github.com/Oborysenko/Separete_nodes.git"
       - hostPath:
-          path: /var/run/docker.sock
+          path: /var/run
         name: dockersocket
       - name: docker-graph-storage 
         emptyDir: {}
