@@ -63,6 +63,8 @@ spec:
           mountPath: /var/lib/docker 
         - name: dockerbin 
           mountPath: /usr/bin/docker
+        - name: libltdl 
+          mountPath: /usr/lib/x86_64-linux-gnu/libltdl.so.7
         ports:
         - containerPort: 7051
         - containerPort: 7053
@@ -81,5 +83,8 @@ spec:
       - name: dockerbin
         hostPath:
           path: /usr/bin/docker
+      - name: libltdl
+        hostPath:
+          path: /usr/lib/x86_64-linux-gnu/libltdl.so.7
 status:
   replicas: 0
