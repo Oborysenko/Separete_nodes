@@ -23,7 +23,7 @@ spec:
         - name: CORE_PEER_ID
           value: peer1-org2-example-com
         - name: CORE_PEER_ADDRESS
-          value: peer1-org2-example-com:7051
+          value: 10.0.20.212:7051
         - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
           value: peer1-org2-example-com:7051
         - name: CORE_PEER_LOCALMSPID
