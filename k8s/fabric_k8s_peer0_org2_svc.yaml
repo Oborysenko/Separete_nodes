@@ -15,5 +15,6 @@ spec:
      targetPort: 7053
   selector:
     service: peer0-org2-example-com
+  clusterIP: 10.0.20.202
 status:
   loadBalancer: {}
